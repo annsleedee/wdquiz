@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>What dog breed fits you?</title>
+<style>
+body {
+background: url("pawprint.jpg")no-repeat center scroll;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+background-size: cover;
+-o-background-size: cover;
+font-family: Helvetica;
+}
+
+#main {
+width: 60%;
+border: 1px gray solid;
+margin: auto;
+padding: 10px;
+background-color: #99e6ff;
+border-radius: 10px;
+}
+
+#header {
+margin-top: 0;
+border: 2px solid black;
+padding: 5px;
+height: 250px;
+background: url("looking.jpg") no-repeat bottom center scroll;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+background-size: cover;
+-o-background-size: cover;
+text-align: center;
+}
+
+
+label {
+width: 150px;
+display: inline;
+}
+
+button {
+display: block;
+margin-top: 20px;
+
+}
+
+
+</style>
+</head>
+<body>
+<div id="main">
+<div id="header"><h1>What dog breed fits you best?</h1></div>
+
+<form  id="form1">
+<p><strong>What is your personality?</strong></p></td><td>
+<label><input type="radio" name="personality" id="lone" value="cat" />Loner</label>
+<label><input type="radio" name="personality" id="out" value="border" />Adventurous</label>
+<label><input type="radio" name="personality" id="home" value="king" />Homebody with friends</label>
+<label><input type="radio" name="personality" id="flow" value="german" />Go with the flow</label>
+
+<p><strong>What is your favorite thing to do in your free time?</strong></p>
+<label><input type="radio" name="activity" id="cuddle" value="king" />Cuddle up with in bed</label>
+<label><input type="radio" name="activity" id="movie" value="cat" />Watch movies</label>
+<label><input type="radio"  name="activity"id="walk" value="german" />Go for a walk or hike</label>
+<label><input type="radio"  name="activity"id="sports" value="border" />Play sports</label>
+
+<p><strong>What size living space do you occupy?</strong></p>
+<label><input type="radio" name="living" id="house" value="german" />House</label>
+<label><input type="radio" name="living" id="apt" value="cat" />Apartment</label>
+<label><input type="radio" name="living" id="farm" value="border" />Farm</label>
+<label><input type="radio" name="living" id="town" value="king" />Townhouse</label>
+
+<p><strong>How often are you home?</strong></p>
+<label><input type="radio" name="time" id="never" value="cat" />Never</label>
+<label><input type="radio" name="time" id="most" value="king" />Gone most of the day</label>
+<label><input type="radio" name="time" id="school" value="german" />Only gone for school or work</label>
+<label><input type="radio" name="time" id="adventure" value="border" />If not at school or work, on an adventure</label>
+
+
+
+<button type="submit" value="Submit">Submit</button>
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p>
+<p id="answer4"></p>
+<p id="answer5"></p>
+<p id="answer6"></p>
+
+</div>
+<script>
+
+
+	document.getElementById("form1").onsubmit=function() {
+
+	  personality = document.querySelector('input[name = "personality"]:checked').value;
+
+
+	  activity = document.querySelector('input[name = "activity"]:checked').value;
+
+	  living = document.querySelector('input[name = "living"]:checked').value;
+
+    time = document.querySelector('input[name = "time"]:checked').value;
+
+	  // initialize score variables
+	  cat = 0;
+	  king = 0;
+    german = 0;
+    border = 0;
+
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "cat") { cat = cat + 1}
+	  if(x == "king") { king = king + 1}
+    if(x == "german") {german = german + 1}
+    if(x == "border") {border = border + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+
+	  //call function for each question
+	  eachscore(eval("personality"));
+	  eachscore(eval("activity"));
+	  eachscore(eval("living"));
+    eachscore(eval("time"));
+
+
+
+	  all = [cat, king, german, border,];
+
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+
+
+// object holding scores and feedback
+scores = [{index:0, feedback: "Your best fit is a cat", image: "catmeme.jpg" },
+{index:1, feedback: "Your best fit is a King Charles Spaniel", image: "lick.jpg"},
+{index:2, feedback: "Your best fit is a German Shepard", image: "shepard.jpg"},
+{index:3, feedback: "Your best fit is a Border Collie", image: "collie.jpg"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+  result2 =  "<br /><img src='" + scores[i].image + "' width='300'  />";
+document.getElementById("answer5").innerHTML = scores[i].feedback;
+    document.getElementById("answer6").innerHTML = result2;
+}
+}
+
+
+
+
+
+
+
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+
+
+</script>
+
+
+
+</body>
+</html>
